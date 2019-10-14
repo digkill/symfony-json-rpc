@@ -25,3 +25,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    mapping_aware_service:
+        class: App\MappingCollector
+        tags: ['json_rpc_http_server.method_aware']
+
+    App\Method\PingMethod:
+        public: false
+        tags: [{ method: 'ping', name: 'json_rpc_http_server.jsonrpc_method' }]
+
+    App\Method\ParamsMethod:
+        public: false
+        tags: [{ method: 'params', name: 'json_rpc_http_server.jsonrpc_method' }]
